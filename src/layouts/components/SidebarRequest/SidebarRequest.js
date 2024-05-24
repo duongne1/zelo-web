@@ -20,7 +20,9 @@ function SidebarRequest() {
 
     const fetchFriendRequests = async () => {
         try {
-            const response = await axios.get('api/v1/users/getfriendRecivedWeb/' + getUser._id);
+            const response = await axios.get(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/getfriendRecivedWeb/' + getUser._id,
+            );
             setFriendRequests(response.data);
         } catch (error) {
             console.error('Error fetching friend requests:', error);
@@ -29,7 +31,9 @@ function SidebarRequest() {
 
     const fetchRequestSent = async () => {
         try {
-            const response = await axios.get('api/v1/users/getfriendRequestWeb/' + getUser._id);
+            const response = await axios.get(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/getfriendRequestWeb/' + getUser._id,
+            );
             setFriendRequestsSend(response.data);
         } catch (error) {
             console.error('Error fetching friend requests send:', error);

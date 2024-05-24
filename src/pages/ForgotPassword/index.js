@@ -51,7 +51,7 @@ function SignIn(props) {
 
         try {
             // Gọi API để kiểm tra tên người dùng
-            const response = await axios.post('api/v1/users/username', {
+            const response = await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/username', {
                 username: normalizePhoneNumber(username),
             });
             setUserOtp(response.data);

@@ -238,7 +238,9 @@ function Home({ selectedChatItem }) {
     const fetchArrayUser = async () => {
         try {
             if (chatItem?._id) {
-                const response = await axios.get(`api/v1/conversation/getArrayUserConversationUsers/${chatItem?._id}`);
+                const response = await axios.get(
+                    `https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getArrayUserConversationUsers/${chatItem?._id}`,
+                );
                 console.log('arrayuser', response.data);
                 setArrayUser(response.data);
                 setSelectedFriends(response.data);
@@ -277,7 +279,9 @@ function Home({ selectedChatItem }) {
     };
     const fetchFriends = async () => {
         try {
-            const response = await axios.get(`api/v1/users/getFriendWithDetails/${getUser?._id}`);
+            const response = await axios.get(
+                `https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/getFriendWithDetails/${getUser?._id}`,
+            );
             // if (searchValueUsername.length > 1) {
             //     const filteredUsers = response.data.filter((user) => {
             //         const normalizedUserPhone = normalizePhoneNumber(user.username);
@@ -431,9 +435,12 @@ function Home({ selectedChatItem }) {
     const fetchAllPin = async () => {
         try {
             if (chatItem?._id) {
-                const response = await axios.post('api/v1/messages/getAllPinMessages', {
-                    conversationId: chatItem?._id,
-                });
+                const response = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/getAllPinMessages',
+                    {
+                        conversationId: chatItem?._id,
+                    },
+                );
 
                 if (response.data) {
                     setArrayAllPin(response.data);
@@ -476,11 +483,14 @@ function Home({ selectedChatItem }) {
         try {
             if (chatItem?._id) {
                 const conversationId = chatItem?._id;
-                const response = await axios.get(`api/v1/conversation/getConversationById/${conversationId}`, {
-                    headers: {
-                        token: `Bearer ${getUser?.token}`,
+                const response = await axios.get(
+                    `https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getConversationById/${conversationId}`,
+                    {
+                        headers: {
+                            token: `Bearer ${getUser?.token}`,
+                        },
                     },
-                });
+                );
 
                 const data = response.data;
                 setChatItem(data);
@@ -494,11 +504,14 @@ function Home({ selectedChatItem }) {
         try {
             if (getUser?._id) {
                 const userId = getUser?._id;
-                const response = await axios.get(`api/v1/conversation/getConversationByUserId/${userId}`, {
-                    headers: {
-                        token: `Bearer ${getUser?.token}`,
+                const response = await axios.get(
+                    `https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getConversationByUserId/${userId}`,
+                    {
+                        headers: {
+                            token: `Bearer ${getUser?.token}`,
+                        },
                     },
-                });
+                );
 
                 const data = response.data;
                 setConversationAll(data);
@@ -517,12 +530,15 @@ function Home({ selectedChatItem }) {
             }
 
             // Gửi yêu cầu POST đến API để tạo tin nhắn mới
-            const response = await axios.post('api/v1/messages/addMessageWeb', {
-                conversationId: conversationId, // ID của cuộc trò chuyện hoặc nhóm
-                content: inputRef.current.value,
-                memberId: memberId,
-                type: 'text',
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                {
+                    conversationId: conversationId, // ID của cuộc trò chuyện hoặc nhóm
+                    content: inputRef.current.value,
+                    memberId: memberId,
+                    type: 'text',
+                },
+            );
 
             // Kiểm tra xem yêu cầu đã thành công hay không
             if (response.data) {
@@ -547,7 +563,7 @@ function Home({ selectedChatItem }) {
             }
 
             // Gửi yêu cầu POST đến API để tạo tin nhắn trả lời
-            const response = await axios.post('api/v1/messages/addReply', {
+            const response = await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addReply', {
                 conversationId: conversationId,
                 content: inputRef.current.value,
                 memberId: memberId,
@@ -573,12 +589,15 @@ function Home({ selectedChatItem }) {
     const shareNewMessage = async (conversationIds, content, type) => {
         try {
             // Gửi yêu cầu POST đến API để tạo tin nhắn mới
-            const response = await axios.post('api/v1/messages/senderMessageToConversations', {
-                conversationIds: conversationIds,
-                content: content,
-                memberId: memberId,
-                type: type,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/senderMessageToConversations',
+                {
+                    conversationIds: conversationIds,
+                    content: content,
+                    memberId: memberId,
+                    type: type,
+                },
+            );
 
             // Kiểm tra xem yêu cầu đã thành công hay không
             if (response.data) {
@@ -707,22 +726,29 @@ function Home({ selectedChatItem }) {
                 formData.append('image', file);
 
                 // Gửi hình ảnh lên server để upload lên S3
-                const response = await axios.post('api/v1/messages/uploadImageToS3', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
+                const response = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/uploadImageToS3',
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
                     },
-                });
+                );
 
                 // Lấy URL của hình ảnh đã upload thành công
                 const imageUrl = response.data.imageUrl;
 
                 // Gửi tin nhắn mới kèm theo URL của hình ảnh đó
-                const messageResponse = await axios.post('api/v1/messages/addMessageWeb', {
-                    conversationId: conversationId,
-                    content: imageUrl,
-                    memberId: memberId,
-                    type: 'image',
-                });
+                const messageResponse = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                    {
+                        conversationId: conversationId,
+                        content: imageUrl,
+                        memberId: memberId,
+                        type: 'image',
+                    },
+                );
 
                 const data = await messageResponse.data;
                 // Xử lý response từ server (nếu cần)
@@ -768,11 +794,14 @@ function Home({ selectedChatItem }) {
 
     const handleDeleteMessage = async (conversationId, messageId, memberId) => {
         try {
-            const response = await axios.post('api/v1/messages/deleteMessage', {
-                conversationId,
-                messageId,
-                memberId,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/deleteMessage',
+                {
+                    conversationId,
+                    messageId,
+                    memberId,
+                },
+            );
 
             if (response.data) {
                 socketRef.emit('message', { message: 'Hello', room: conversationId });
@@ -807,11 +836,14 @@ function Home({ selectedChatItem }) {
     const handleThuHoiMessage = async (conversationId, messageId, memberId) => {
         try {
             handleDeleteReactionAll(messageId);
-            const response = await axios.post('api/v1/messages/thuHoiMessage', {
-                conversationId,
-                messageId,
-                memberId,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/thuHoiMessage',
+                {
+                    conversationId,
+                    messageId,
+                    memberId,
+                },
+            );
 
             if (response.data) {
                 socketRef.emit('message', { message: 'Hello', room: conversationId });
@@ -941,23 +973,30 @@ function Home({ selectedChatItem }) {
                 console.log('filedhdhđ', encodedFileName);
 
                 // Gửi hình ảnh lên server để upload lên S3
-                const response = await axios.post('api/v1/messages/uploadImageToS3', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
+                const response = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/uploadImageToS3',
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
                     },
-                });
+                );
 
                 // Lấy URL của hình ảnh đã upload thành công
                 const fileURL = response.data.imageUrl;
 
                 console.log('fileURL1111', fileURL);
                 // Gửi tin nhắn mới kèm theo URL của hình ảnh đó
-                const messageResponse = await axios.post('api/v1/messages/addMessageWeb', {
-                    conversationId: conversationId,
-                    content: fileURL,
-                    memberId: memberId,
-                    type: 'file',
-                });
+                const messageResponse = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                    {
+                        conversationId: conversationId,
+                        content: fileURL,
+                        memberId: memberId,
+                        type: 'file',
+                    },
+                );
 
                 const data = await messageResponse.data;
                 // Xử lý response từ server (nếu cần)
@@ -1047,19 +1086,27 @@ function Home({ selectedChatItem }) {
     const addDeputyToConversationHandler = async (conversationID, deputyUserID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/addDeputyToConversation', {
-                conversationID,
-                deputyUserID,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/addDeputyToConversation',
+                {
+                    conversationID,
+                    deputyUserID,
+                },
+            );
 
-            const responseUser = await axios.get('api/v1/users/' + deputyUserID);
+            const responseUser = await axios.get(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/' + deputyUserID,
+            );
 
-            const response1 = await axios.post('api/v1/messages/addMessageWeb', {
-                conversationId: conversationID,
-                content: `${getUserName}  đã thêm ${responseUser.data.name} làm  phó nhóm`,
-                memberId: memberId, // Biến memberId của bạn ở đây
-                type: 'notify',
-            });
+            const response1 = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                {
+                    conversationId: conversationID,
+                    content: `${getUserName}  đã thêm ${responseUser.data.name} làm  phó nhóm`,
+                    memberId: memberId, // Biến memberId của bạn ở đây
+                    type: 'notify',
+                },
+            );
             if (response.data || response1.data) {
                 setIsInfoVisible(false);
 
@@ -1078,18 +1125,26 @@ function Home({ selectedChatItem }) {
     const deleteDeputyToConversationHandler = async (conversationID, deputyUserID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/removeDeputyFromConversation', {
-                conversationID,
-                deputyUserID,
-            });
-            const responseUser = await axios.get('api/v1/users/' + deputyUserID);
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/removeDeputyFromConversation',
+                {
+                    conversationID,
+                    deputyUserID,
+                },
+            );
+            const responseUser = await axios.get(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/' + deputyUserID,
+            );
 
-            const response1 = await axios.post('api/v1/messages/addMessageWeb', {
-                conversationId: conversationID,
-                content: `${getUserName} đã xóa phó nhóm ${responseUser.data.name} `,
-                memberId: memberId, // Biến memberId của bạn ở đây
-                type: 'notify',
-            });
+            const response1 = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                {
+                    conversationId: conversationID,
+                    content: `${getUserName} đã xóa phó nhóm ${responseUser.data.name} `,
+                    memberId: memberId, // Biến memberId của bạn ở đây
+                    type: 'notify',
+                },
+            );
             if (response.data || response1.data) {
                 setIsInfoVisible(false);
 
@@ -1108,13 +1163,16 @@ function Home({ selectedChatItem }) {
     const leaveConversationHandler = async (conversationID, userID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/leaveConversation', {
-                conversationID,
-                userID,
-            });
-            const responseUser = await axios.get('api/v1/users/' + userID);
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/leaveConversation',
+                {
+                    conversationID,
+                    userID,
+                },
+            );
+            const responseUser = await axios.get('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/' + userID);
 
-            await axios.post('api/v1/messages/addMessageWeb', {
+            await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                 conversationId: conversationID,
                 content: `${responseUser.data.name} đã rời nhóm`,
                 memberId: memberId, // Biến memberId của bạn ở đây
@@ -1138,11 +1196,14 @@ function Home({ selectedChatItem }) {
     const removedUserToConversationHandler = async (conversationID, userID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/leaveConversation', {
-                conversationID,
-                userID,
-            });
-            const responseUser = await axios.get('api/v1/users/' + userID);
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/leaveConversation',
+                {
+                    conversationID,
+                    userID,
+                },
+            );
+            const responseUser = await axios.get('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/' + userID);
 
             await axios.post('api/v1/messages/addMessageWeb', {
                 conversationId: conversationID,
@@ -1173,12 +1234,15 @@ function Home({ selectedChatItem }) {
     const leaveConversationInLeaderHandler = async (conversationID, userID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/leaveConversation', {
-                conversationID,
-                userID,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/leaveConversation',
+                {
+                    conversationID,
+                    userID,
+                },
+            );
 
-            const responseUser = await axios.get('api/v1/users/' + userID);
+            const responseUser = await axios.get('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/' + userID);
 
             await axios.post('api/v1/messages/addMessageWeb', {
                 conversationId: conversationID,
@@ -1203,7 +1267,10 @@ function Home({ selectedChatItem }) {
     const deleteConversationHandler = async (conversationID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/deleteConversationById/' + conversationID);
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/deleteConversationById/' +
+                    conversationID,
+            );
             socketRef.emit('sendMessage', `${conversationID}Giả tán xóa cuộc trò chuyện`);
 
             setInfoVisible(false);
@@ -1220,19 +1287,27 @@ function Home({ selectedChatItem }) {
     const selectNewLeaderHandler = async (conversationID, newLeaderUserID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/selectNewLeader', {
-                conversationID,
-                newLeaderUserID,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/selectNewLeader',
+                {
+                    conversationID,
+                    newLeaderUserID,
+                },
+            );
 
-            const responseUser = await axios.get('api/v1/users/' + newLeaderUserID);
+            const responseUser = await axios.get(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/' + newLeaderUserID,
+            );
 
-            const response1 = await axios.post('api/v1/messages/addMessageWeb', {
-                conversationId: conversationID,
-                content: `${getUserName} đã cho ${responseUser.data.name} làm nhóm trưởng.`,
-                memberId: memberId, // Biến memberId của bạn ở đây
-                type: 'notify',
-            });
+            const response1 = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                {
+                    conversationId: conversationID,
+                    content: `${getUserName} đã cho ${responseUser.data.name} làm nhóm trưởng.`,
+                    memberId: memberId, // Biến memberId của bạn ở đây
+                    type: 'notify',
+                },
+            );
 
             if (response.data || response1.data) {
                 socketRef.emit('sendMessage', `${getUser?.name} cho ${responseUser.data.name} làm nhóm trưởng.`);
@@ -1251,13 +1326,16 @@ function Home({ selectedChatItem }) {
     const addUserToConversation = async (conversationID, arrayUserID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/addUserToConversation', {
-                conversationID,
-                arrayUserID,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/addUserToConversation',
+                {
+                    conversationID,
+                    arrayUserID,
+                },
+            );
             const newMemberNames = response.data.newMemberNames;
             for (const memberName of newMemberNames) {
-                await axios.post('api/v1/messages/addMessageWeb', {
+                await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                     conversationId: conversationID,
                     content: `${getUserName} đã thêm ${memberName} vào nhóm`,
                     memberId: memberId, // Biến memberId của bạn ở đây
@@ -1279,11 +1357,14 @@ function Home({ selectedChatItem }) {
     const updateNameConversation = async (conversationID) => {
         try {
             // Gọi API addDeputyToConversation với thông tin conversationID và deputyUserID
-            const response = await axios.post('api/v1/conversation/updateConversationNameById', {
-                conversationID,
-                name: nameConversation,
-            });
-            await axios.post('api/v1/messages/addMessageWeb', {
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/updateConversationNameById',
+                {
+                    conversationID,
+                    name: nameConversation,
+                },
+            );
+            await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                 conversationId: conversationID,
                 content: `🖊️ ${getUserName} đã đổi thành "${nameConversation}" `,
                 memberId: memberId, // Biến memberId của bạn ở đây
@@ -1387,21 +1468,28 @@ function Home({ selectedChatItem }) {
                 formData.append('image', file);
 
                 // Gửi hình ảnh lên server để upload lên S3
-                const response = await axios.post('api/v1/messages/uploadImageToS3', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
+                const response = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/uploadImageToS3',
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
                     },
-                });
+                );
 
                 // Lấy URL của hình ảnh đã upload thành công
                 const fileURL = response.data.imageUrl;
                 // Gửi tin nhắn mới kèm theo URL của hình ảnh đó
-                const messageResponse = await axios.post('api/v1/messages/addMessageWeb', {
-                    conversationId: conversationId,
-                    content: fileURL,
-                    memberId: memberId,
-                    type: 'video',
-                });
+                const messageResponse = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                    {
+                        conversationId: conversationId,
+                        content: fileURL,
+                        memberId: memberId,
+                        type: 'video',
+                    },
+                );
 
                 const data = await messageResponse.data;
                 // Xử lý response từ server (nếu cần)
@@ -1446,11 +1534,14 @@ function Home({ selectedChatItem }) {
 
     const handleAddReaction = async (reactionType, messageId, message) => {
         try {
-            const response = await axios.post('api/v1/messages/addReaction', {
-                messageId: messageId,
-                typeReaction: reactionType,
-                memberId: memberId,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addReaction',
+                {
+                    messageId: messageId,
+                    typeReaction: reactionType,
+                    memberId: memberId,
+                },
+            );
 
             if (response.data) {
                 socketRef.emit('sendMessage', `${messageId} ${calculateTotalReactions(message)}`);
@@ -1466,10 +1557,13 @@ function Home({ selectedChatItem }) {
 
     const handleDeleteReaction = async (messageId, message) => {
         try {
-            const response = await axios.post('api/v1/messages/deleteReaction', {
-                messageId: messageId,
-                memberId: memberId,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/deleteReaction',
+                {
+                    messageId: messageId,
+                    memberId: memberId,
+                },
+            );
 
             if (response.data) {
                 socketRef.emit('sendMessage', `${messageId} ${calculateTotalReactions(message)}`);
@@ -1484,9 +1578,12 @@ function Home({ selectedChatItem }) {
 
     const handleDeleteReactionAll = async (messageId) => {
         try {
-            const response = await axios.post('api/v1/messages/deleteAllReactionByMessageID', {
-                messageId: messageId,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/deleteAllReactionByMessageID',
+                {
+                    messageId: messageId,
+                },
+            );
 
             if (response.data) {
             }
@@ -1507,37 +1604,52 @@ function Home({ selectedChatItem }) {
                 toast.error('Bạn chỉ có thể ghim tối đa 3 tin nhắn!');
             } else {
                 // Nếu chưa có 3 tin nhắn, thực hiện yêu cầu ghim tin nhắn mới
-                const response = await axios.post('api/v1/messages/addPinMessageToConversation', {
-                    conversationId: chatItem._id,
-                    messageId,
-                });
-                const responseMessage = await axios.post('api/v1/messages/getMessageByIdWeb', {
-                    messageId: messageId,
-                });
+                const response = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addPinMessageToConversation',
+                    {
+                        conversationId: chatItem._id,
+                        messageId,
+                    },
+                );
+                const responseMessage = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/getMessageByIdWeb',
+                    {
+                        messageId: messageId,
+                    },
+                );
 
                 if (responseMessage.data.type === 'image') {
-                    const response1 = await axios.post('api/v1/messages/addMessageWeb', {
-                        conversationId: chatItem?._id,
-                        content: `${getUserName} đã ghim tin nhắn hình ảnh`,
-                        memberId: memberId,
-                        type: 'notify',
-                    });
+                    const response1 = await axios.post(
+                        'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                        {
+                            conversationId: chatItem?._id,
+                            content: `${getUserName} đã ghim tin nhắn hình ảnh`,
+                            memberId: memberId,
+                            type: 'notify',
+                        },
+                    );
                     console.log('response1333', response1);
                 } else if (responseMessage.data.type === 'text') {
-                    const response1 = await axios.post('api/v1/messages/addMessageWeb', {
-                        conversationId: chatItem?._id,
-                        content: `${getUserName} đã ghim tin nhắn <strong > ${response.data.pinMessages[0].content} </strong>`,
-                        memberId: memberId, // Biến memberId của bạn ở đây
-                        type: 'notify',
-                    });
+                    const response1 = await axios.post(
+                        'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                        {
+                            conversationId: chatItem?._id,
+                            content: `${getUserName} đã ghim tin nhắn <strong > ${response.data.pinMessages[0].content} </strong>`,
+                            memberId: memberId, // Biến memberId của bạn ở đây
+                            type: 'notify',
+                        },
+                    );
                     console.log('response1333', response1);
                 } else {
-                    const response1 = await axios.post('api/v1/messages/addMessageWeb', {
-                        conversationId: chatItem?._id,
-                        content: `${getUserName} đã ghim tin nhắn file`,
-                        memberId: memberId, // Biến memberId của bạn ở đây
-                        type: 'notify',
-                    });
+                    const response1 = await axios.post(
+                        'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                        {
+                            conversationId: chatItem?._id,
+                            content: `${getUserName} đã ghim tin nhắn file`,
+                            memberId: memberId, // Biến memberId của bạn ở đây
+                            type: 'notify',
+                        },
+                    );
                     console.log('response1333', response1);
                 }
 
@@ -1559,24 +1671,30 @@ function Home({ selectedChatItem }) {
             if (messageId === null) {
                 return;
             }
-            await axios.post('api/v1/messages/deletePinMessageToConversation', {
-                conversationId: chatItem._id,
-                messageId,
-            });
+            await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/deletePinMessageToConversation',
+                {
+                    conversationId: chatItem._id,
+                    messageId,
+                },
+            );
 
-            const responseMessage = await axios.post('api/v1/messages/getMessageByIdWeb', {
-                messageId,
-            });
+            const responseMessage = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/getMessageByIdWeb',
+                {
+                    messageId,
+                },
+            );
             console.log('typeXxoa', responseMessage.data.type);
             if (responseMessage.data.type === 'image') {
-                await axios.post('api/v1/messages/addMessageWeb', {
+                await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                     conversationId: chatItem?._id,
                     content: `${getUserName} đã bỏ ghim tin nhắn hình ảnh`,
                     memberId: memberId, // Biến memberId của bạn ở đây
                     type: 'notify',
                 });
             } else if (responseMessage.data.type === 'text') {
-                await axios.post('api/v1/messages/addMessageWeb', {
+                await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                     conversationId: chatItem?._id,
                     content: `${getUserName} đã bỏ ghim tin nhắn <strong > ${responseMessage.data.content} </strong>`,
                     memberId: memberId, // Biến memberId của bạn ở đây
@@ -1603,12 +1721,15 @@ function Home({ selectedChatItem }) {
 
     const handlePrioritizePinMessage = async (messageId) => {
         try {
-            const response = await axios.post('api/v1/messages/prioritizePinMessage', {
-                conversationId: chatItem._id,
-                messageId,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/prioritizePinMessage',
+                {
+                    conversationId: chatItem._id,
+                    messageId,
+                },
+            );
 
-            await axios.post('api/v1/messages/addMessageWeb', {
+            await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                 conversationId: chatItem?._id,
                 content: `${getUserName} đã chỉnh sửa danh sách ghim.`,
                 memberId: memberId, // Biến memberId của bạn ở đây

@@ -92,7 +92,10 @@ function Search() {
 
     const fetchDataConversationByUserID = async () => {
         try {
-            const response = await axios.get('api/v1/conversation/getConversationByUserId/' + getUser?._id);
+            const response = await axios.get(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getConversationByUserId/' +
+                    getUser?._id,
+            );
             if (response.data) {
                 const fetchedData = response.data;
                 setData(fetchedData);
@@ -104,7 +107,7 @@ function Search() {
 
     const fetchDataUsername = async () => {
         try {
-            const response = await axios.get('api/v1/users/getAllUser');
+            const response = await axios.get('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/getAllUser');
             if (response.data) {
                 const fetchedUserData = response.data;
                 setUserData(fetchedUserData);
@@ -194,10 +197,13 @@ function Search() {
 
     const handleFriendRequest = async (id) => {
         try {
-            const response = await axios.post('api/v1/users/addFriendRequest', {
-                id_sender: getUser?._id,
-                id_receiver: id,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/addFriendRequest',
+                {
+                    id_sender: getUser?._id,
+                    id_receiver: id,
+                },
+            );
             if (response.data) {
                 socketRef.emit('sendMessage', `${response.data}`);
                 toast.success('Add friend request successfully');
@@ -290,7 +296,9 @@ function Search() {
     // get list friend
     const fetchFriends = async () => {
         try {
-            const response = await axios.get(`api/v1/users/getFriendWithDetails/${getUser?._id}`);
+            const response = await axios.get(
+                `https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/getFriendWithDetails/${getUser?._id}`,
+            );
 
             setListFriend(response.data);
         } catch (error) {}
@@ -352,21 +360,28 @@ function Search() {
             const formData = new FormData();
             formData.append('image', selectedImage);
 
-            const response = await axios.post('api/v1/messages/uploadImageToS3', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/uploadImageToS3',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
                 },
-            });
+            );
 
             if (response.data && response.data.imageUrl) {
                 console.log('Image uploaded successfully:', response.data.imageUrl);
 
                 // Tiếp tục tạo cuộc trò chuyện mới với URL ảnh
-                const createConversationResponse = await axios.post('api/v1/conversation/createConversationWeb', {
-                    arrayUserId: selectedFriends,
-                    groupImage: response.data.imageUrl, // Sử dụng URL của ảnh đã tải lên S3
-                    name: groupName,
-                });
+                const createConversationResponse = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/createConversationWeb',
+                    {
+                        arrayUserId: selectedFriends,
+                        groupImage: response.data.imageUrl, // Sử dụng URL của ảnh đã tải lên S3
+                        name: groupName,
+                    },
+                );
                 const conversation = createConversationResponse.data;
                 const memberId1 = conversation?.members.find((member) => member.userId?._id === getUser?._id)?._id;
                 const myName = getUser?.name;

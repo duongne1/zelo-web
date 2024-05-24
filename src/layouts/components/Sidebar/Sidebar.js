@@ -49,11 +49,14 @@ function Sidebar({ onChatItemClick }) {
     const fetchConversations = async () => {
         try {
             if (getUser?._id) {
-                const response = await axios.get(`api/v1/conversation/getConversationByUserId/${getUser?._id}`, {
-                    headers: {
-                        token: `Bearer ${getUser?.token}`,
+                const response = await axios.get(
+                    `https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getConversationByUserId/${getUser?._id}`,
+                    {
+                        headers: {
+                            token: `Bearer ${getUser?.token}`,
+                        },
                     },
-                });
+                );
                 const data = response.data;
                 const newMessageLengthEnd = data.map((conversation) => ({
                     id: conversation._id,

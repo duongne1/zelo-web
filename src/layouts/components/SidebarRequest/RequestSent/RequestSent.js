@@ -37,10 +37,13 @@ function RequestSend({ avatar, name, timeRequest, content, requestId, onRefuseSe
     const handleRefuseClick = async () => {
         onRefuseSend(requestId);
         try {
-            const response = await axios.post('api/v1/users/deleteFriendRequest', {
-                id_sender: getUser?._id,
-                id_receiver: requestId,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/deleteFriendRequest',
+                {
+                    id_sender: getUser?._id,
+                    id_receiver: requestId,
+                },
+            );
             console.log(response.data); // Log kết quả từ server (nếu cần)
             console.log('Xóa yêu cầu kết bạn thành công');
             return true;

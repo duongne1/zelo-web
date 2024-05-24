@@ -146,11 +146,14 @@ function Header() {
         }
 
         try {
-            const response = await axios.post('api/v1/users/changePassword', {
-                username: getUser.username,
-                passwordOld: currentPassword,
-                passwordNew: newPassword,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/changePassword',
+                {
+                    username: getUser.username,
+                    passwordOld: currentPassword,
+                    passwordNew: newPassword,
+                },
+            );
 
             // Xử lý phản hồi từ API
             console.log(response.data.message);
@@ -208,11 +211,15 @@ function Header() {
             formData.append('avatar', selectedImage);
             formData.append('username', getUser.username);
 
-            const response = await axios.post('api/v1/users/upload-avatar', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/upload-avatar',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
                 },
-            });
+            );
             setUserAvatar(response.data.user.avatar);
 
             getUserLogin(user1?.accessToken, dispatch, response.data.user._id, axiosJWT);

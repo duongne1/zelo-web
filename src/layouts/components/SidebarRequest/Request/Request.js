@@ -40,10 +40,13 @@ function Request({ avatar, name, timeRequest, content, requestId, onAccept, onRe
     const handleRefuseClick = async () => {
         onRefuse(requestId);
         try {
-            const response = await axios.post('api/v1/users/deleteFriendRequest', {
-                id_sender: requestId,
-                id_receiver: getUser?._id,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/deleteFriendRequest',
+                {
+                    id_sender: requestId,
+                    id_receiver: getUser?._id,
+                },
+            );
             console.log(response.data); // Log kết quả từ server (nếu cần)
             console.log('Xóa yêu cầu kết bạn thành công');
         } catch (error) {
@@ -54,10 +57,13 @@ function Request({ avatar, name, timeRequest, content, requestId, onAccept, onRe
     const handleAcceptClick = async () => {
         onAccept(requestId);
         try {
-            const response = await axios.post('api/v1/users/acceptFriendRequest', {
-                id_sender: requestId,
-                id_receiver: getUser?._id,
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/acceptFriendRequest',
+                {
+                    id_sender: requestId,
+                    id_receiver: getUser?._id,
+                },
+            );
 
             if (response.data) {
                 socketRef.emit('sendMessage', `${requestId} kết bạn với ${getUser?._id} thành công`);
@@ -70,15 +76,21 @@ function Request({ avatar, name, timeRequest, content, requestId, onAccept, onRe
 
     const createConversation = async () => {
         try {
-            const response = await axios.post('api/v1/conversation/createConversationWeb', {
-                arrayUserId: [requestId, getUser?._id],
-            });
-            const response1 = await axios.post('api/v1/messages/addMessageWeb', {
-                conversationId: response.data._id,
-                content: 'Các bạn đã là bạn bè. Hãy trò chuyện với nhau nhé!',
-                memberId: getUser._id, // Biến memberId của bạn ở đây
-                type: 'notify',
-            });
+            const response = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/createConversationWeb',
+                {
+                    arrayUserId: [requestId, getUser?._id],
+                },
+            );
+            const response1 = await axios.post(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb',
+                {
+                    conversationId: response.data._id,
+                    content: 'Các bạn đã là bạn bè. Hãy trò chuyện với nhau nhé!',
+                    memberId: getUser._id, // Biến memberId của bạn ở đây
+                    type: 'notify',
+                },
+            );
         } catch (error) {
             console.error('Error deleting friend request:', error);
         }

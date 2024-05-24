@@ -100,7 +100,7 @@ export const getConversationsById = async (accessToken, dispatch, id, axiosJWT) 
 export const deleteUser = async (accessToken, dispatch, id, axiosJWT) => {
     dispatch(deleteUserStart());
     try {
-        const res = await axiosJWT.delete('/v1/user/' + id, {
+        const res = await axiosJWT.delete('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/user/' + id, {
             headers: { token: `Bearer ${accessToken}` },
         });
         dispatch(deleteUsersSuccess(res.data));
