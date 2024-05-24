@@ -1,0 +1,75 @@
+.wrapper {
+    width: 100%;
+    /* Sử dụng chiều rộng 100% */
+    padding: 20px;
+    /* Khoảng cách padding xung quanh */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /* Hiển thị các phần tử theo chiều dọc */
+    align-items: center;
+    overflow-y: auto;
+    /* Căn giữa theo chiều ngang */
+
+}
+
+.friend-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Sử dụng chiều rộng 100% */
+    padding: 20px;
+    border-bottom: 1px solid rgb(208, 208, 208);
+
+    /* Đường viền dưới */
+    width: 1000px;
+    max-width: 1000px;
+    justify-content: space-between;
+    align-self: center;
+
+    .btn-more {
+        position: absolute;
+        right: 170px;
+        border: none;
+        background-color: transparent;
+        color: rgb(240, 40, 40);
+        cursor: pointer;
+    }
+}
+
+.friend-item :hover {
+    background-color: rgb(240, 240, 240);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+
+
+
+.user-avatar {
+    width: 60px;
+    /* Chiều rộng ảnh */
+    height: 60px;
+    /* Chiều cao ảnh */
+    object-fit: cover;
+    /* Đảm bảo hình ảnh bao phủ đầy đủ kích thước */
+    border-radius: 50%;
+    /* Bo tròn ảnh */
+    margin-right: 10px;
+    /* Khoảng cách với phần tử bên phải */
+}
+
+.info-item {
+    font-size: 16px;
+    /* Kích thước chữ */
+    font-weight: bold;
+    /* Độ đậm của chữ */
+}

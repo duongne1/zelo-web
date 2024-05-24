@@ -1,0 +1,24 @@
+.info {
+    display: flex;
+    flex-wrap: wrap;
+    /* Cho phép các request xuống dòng khi không đủ không gian */
+    overflow-y: auto;
+    align-items: center;
+
+}
+
+.info>* {
+    margin: 10px;
+    /* Khoảng cách giữa các Request */
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+}
+
+.heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}

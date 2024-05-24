@@ -1,0 +1,75 @@
+.wrapper {
+    width: 1100px;
+    padding: 20px;
+
+}
+
+.container {
+    display: flex;
+    height: 575px;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+
+
+}
+
+.group-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgb(208, 208, 208);
+
+    /* Đường viền dưới */
+    max-width: 1000px;
+    width: 1000px;
+    justify-content: space-between;
+    align-self: center;
+    // background-color: yellow;
+}
+
+.group-item :hover {
+    background-color: rgb(240, 240, 240);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+
+.user-avatar {
+    width: 60px;
+    /* Chiều rộng ảnh */
+    height: 60px;
+    /* Chiều cao ảnh */
+    object-fit: cover;
+    /* Đảm bảo hình ảnh bao phủ đầy đủ kích thước */
+    border-radius: 50%;
+    /* Bo tròn ảnh */
+    margin-right: 10px;
+    /* Khoảng cách với phần tử bên phải */
+}
+
+.info-item {
+    font-size: 16px;
+    /* Kích thước chữ */
+    font-weight: bold;
+    /* Độ đậm của chữ */
+}
+
+.btn-more {
+    border: none;
+    background-color: transparent;
+    color: rgb(240, 40, 40);
+    cursor: pointer;
+}
+
+.info-length {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgb(133, 131, 131);
+}

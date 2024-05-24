@@ -1,0 +1,32 @@
+.wrapper {
+    padding-top: 60px;
+    padding-left: 20px;
+    border-left: 1px solid rgb(208, 208, 208);
+    height: 100%;
+    width: 1125px;
+    overflow: auto;
+    border: 1px solid rgb(208, 208, 208);
+}
+
+/* Chỉnh màu cho thanh cuộn trong Chrome và Safari */
+.wrapper::-webkit-scrollbar {
+    width: 10px;
+    /* Chiều rộng của thanh cuộn */
+}
+
+/* Màu của phần thumb (phần di chuyển) của thanh cuộn */
+.wrapper::-webkit-scrollbar-thumb {
+    // background-color: rgb(226, 19, 19);
+    /* Màu của thumb */
+    border-radius: 5px;
+    color: red;
+    /* Độ cong viền của thumb */
+}
+
+/* Màu của phần track (phần nền) của thanh cuộn */
+
+/* Ẩn thanh cuộn khi không được hover */
+.wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+    /* Màu của thumb khi hover */
+}

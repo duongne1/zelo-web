@@ -1,0 +1,535 @@
+.wrapper {
+    width: 315px;
+    display: flex;
+    border-radius: 15px;
+    margin: 15px;
+    font-family: var(--font-family);
+}
+
+.search {
+    width: 245px;
+    display: flex;
+    align-items: center;
+
+    input {
+        width: 235px;
+        padding: 5px 30px;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        background-color: #e7e7ed;
+
+        &:focus {
+            border-color: #509bf7;
+            outline: none;
+        }
+    }
+
+    .icon-search {
+        position: absolute;
+        align-items: center;
+        border: 1px solid transparent;
+        background-color: transparent;
+        color: #666;
+        cursor: pointer;
+        border: none;
+    }
+
+    .icon-clear {
+        margin: -30px;
+        align-items: center;
+        border: 1px solid transparent;
+        background-color: transparent;
+        color: #5c5c5c;
+        cursor: pointer;
+    }
+
+    &:focus-within {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
+}
+
+.list-icon {
+    // margin: 5px;
+    display: flex;
+    flex-direction: row;
+
+    .icon {
+        padding: 5px;
+        border: 1px solid transparent;
+        background-color: transparent;
+
+        &:hover {
+            border-radius: 5px;
+            background-color: #e7e7ed;
+            transition: background-color 0.3s ease;
+        }
+
+        img {
+            width: 20px;
+            object-fit: cover;
+            filter: contrast(1.2) saturate(1.2);
+        }
+    }
+
+    .icon+.icon {
+        margin-left: 10px;
+    }
+}
+
+.tippy-content {
+    position: absolute;
+    z-index: 9999;
+    top: 43px;
+    width: 345px;
+    left: -133px;
+    height: 688px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.model-container {
+    width: 400px;
+    height: 570px;
+    padding: 15px;
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+}
+
+.model-container-add {
+    display: flex;
+    width: 350px;
+    height: 170px;
+    // padding: 15px;
+    position: absolute;
+    justify-content: center;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+}
+
+.model-container-group {
+    width: 550px;
+    height: 655px;
+    padding: 15px;
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+}
+
+.model-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.model-img {
+    width: 400px;
+    height: 190px;
+    object-fit: cover;
+
+    margin-left: -15px;
+
+    cursor: pointer;
+
+}
+
+.model-nav {
+    display: flex;
+    align-items: center;
+}
+
+.model-avatar {
+    width: 75px;
+    height: 75px;
+    margin-top: -20px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    /* căn giữa theo chiều ngang */
+    align-items: center;
+
+
+}
+
+.text-avatar {
+    font-size: 13px;
+
+}
+
+.model-icon {
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 50%;
+    margin-left: -20px;
+    margin-top: 20px;
+    padding: 0px 6px 0px 6px;
+    background-color: #ccc;
+
+}
+
+.model-nav-name {
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.model-nav-icon2 {
+    border: none;
+    margin-top: -8px;
+    margin-left: 5px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.div-null {
+    width: 400px;
+    height: 6px;
+
+    margin-left: -15px;
+
+    margin-top: 15px;
+    background-color: #ccc;
+}
+
+.model-bottom {
+    margin-top: 10px;
+}
+
+.model-info {
+    display: flex;
+    font-size: 14px;
+    font-weight: normal;
+
+    p {
+        width: 110px;
+        color: rgb(182, 177, 177);
+    }
+}
+
+.model-line {
+    font-size: 12px;
+    font-weight: normal;
+    color: rgb(182, 177, 177);
+}
+
+.model-line::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin-top: 10px;
+}
+
+.model-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+}
+
+.model-btn:hover {
+    background-color: #ccc;
+
+}
+
+.btn-add-friend {
+    color: #fff;
+    background-color: #509bf7;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    border: none;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.model-nav {
+    margin-top: 30px;
+}
+
+.group-name {
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    width: 425px;
+    box-sizing: border-box;
+    margin-left: 10px;
+    /* Thêm đường viền dưới mặc định với màu xám */
+    border-bottom: 1px solid #D6DBE1;
+
+}
+
+/* Đổi màu đường viền dưới sang xanh khi hover */
+.group-name:hover,
+.group-name:focus {
+    border-bottom: 1px solid #3989FF;
+}
+
+/* CSS cho phần tử .search-group */
+.search-group {
+    margin: 10px;
+    border-radius: 30px;
+    outline: none;
+    padding: 8px 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 5px;
+    border: 1px solid #D6DBE1;
+    padding-left: 15px;
+    /* Thêm đường viền dưới mặc định với màu xám */
+}
+
+/* Đổi màu đường viền dưới sang xanh khi hover */
+.search-group:hover,
+.search-group:focus {
+    border: 1px solid #3989FF;
+}
+
+.h1-group {
+    font-size: 25px;
+    border: none;
+    border-bottom: 1px solid #D6DBE1;
+    align-items: center;
+}
+
+//
+
+.friend-item {
+    display: flex;
+    align-items: center;
+    /* Sử dụng chiều rộng 100% */
+    // padding: 15px;
+    margin: 10px;
+
+    /* Đường viền dưới */
+    max-width: 1500px;
+    width: 500px;
+    justify-content: space-between;
+    align-self: center;
+    // background-color: yellow;
+}
+
+
+.info {
+    display: flex;
+    align-items: center;
+
+}
+
+.user-avatar {
+    width: 50px;
+    /* Chiều rộng ảnh */
+    height: 50px;
+    /* Chiều cao ảnh */
+    object-fit: cover;
+    /* Đảm bảo hình ảnh bao phủ đầy đủ kích thước */
+    border-radius: 50%;
+    /* Bo tròn ảnh */
+    margin-right: 10px;
+    /* Khoảng cách với phần tử bên phải */
+
+}
+
+.info-item {
+    font-size: 14px;
+    /* Kích thước chữ */
+    font-weight: bold;
+    /* Độ đậm của chữ */
+}
+
+
+.check-box {
+    margin-right: 10px;
+    margin-left: 10px;
+
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #555;
+    border-radius: 50%;
+    /* Tạo checkbox hình tròn */
+    outline: none;
+    cursor: pointer;
+}
+
+/* Thiết lập màu nền khi checkbox được chọn */
+.check-box:checked {
+    background-color: #5189f2;
+    border: 1px solid #5189f2;
+}
+
+/* Tạo pseudo-element để tạo đường viền hình chéo khi checkbox được chọn */
+.check-box:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.list-friend {
+    border: none;
+    height: 390px;
+    border-bottom: 1px solid #D6DBE1;
+    border-top: 1px solid #D6DBE1;
+    overflow-y: auto;
+}
+
+.create-group {
+    display: flex;
+    justify-content: flex-end;
+
+    /* Căn các phần tử con sang phải */
+    gap: 10px;
+    /* Khoảng cách giữa các phần tử con */
+}
+
+.bnt-exit,
+.bnt-create {
+    align-items: end;
+    padding: 10px 20px;
+    /* Điều chỉnh padding cho nút */
+    background-color: #007bff;
+    /* Màu nền của nút */
+    color: #fff;
+    /* Màu chữ của nút */
+    border: none;
+    /* Bỏ viền của nút */
+    border-radius: 5px;
+    /* Bo tròn góc cho nút */
+    cursor: pointer;
+    /* Biến con trỏ thành dấu nhấp chuột khi rê chuột vào nút */
+    transition: background-color 0.3s ease;
+    /* Hiệu ứng chuyển đổi màu nền */
+
+    /* CSS khi hover vào nút */
+    &:hover {
+        background-color: #0056b3;
+        /* Màu nền khi hover */
+    }
+}
+
+.info {
+    cursor: pointer;
+    /* Sử dụng con trỏ bàn tay khi chỉ vào */
+    transition: background-color 0.3s ease;
+    width: 100%;
+    /* Hiệu ứng chuyển đổi màu nền */
+}
+
+.info:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    /* Màu nền xám khi hover */
+}
+
+.spinner-icon {
+    animation: spin 1s linear infinite;
+    font-size: 15px;
+    /* Thiết lập animation quay vòng */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+        /* Bắt đầu quay từ góc 0 độ */
+    }
+
+    to {
+        transform: rotate(360deg);
+        /* Quay đến góc 360 độ (hoàn thành vòng) */
+    }
+}
+
+.bnt-tao {
+    align-items: end;
+
+    /* Điều chỉnh padding cho nút */
+    background-color: transparent;
+    /* Màu nền của nút */
+    color: white;
+    /* Màu chữ của nút */
+    border: none;
+    /* Bỏ viền của nút */
+    border-radius: 5px;
+    /* Bo tròn góc cho nút */
+    cursor: pointer;
+    /* Biến con trỏ thành dấu nhấp chuột khi rê chuột vào nút */
+    transition: background-color 0.3s ease;
+
+    /* Hiệu ứng chuyển đổi màu nền */
+    &:hover {
+        background-color: #0056b3;
+        /* Màu nền khi hover */
+    }
+
+}
+
+.model-search {
+    display: flex;
+    flex-direction: row;
+}
+
+.icon-search1 {
+    background-color: transparent;
+    color: #666;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    right: 30px;
+    top: 77px;
+
+}
+
+.model-title-add {
+    padding-top: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    padding-bottom: 10px;
+
+}
+
+.bnt-search-add {
+    margin-top: 20px;
+
+    position: absolute;
+    right: 30px;
+}
+
+.btn-friend {
+    border-radius: 5px;
+    width: 100%;
+    font-size: 18px;
+    margin-top: 5px;
+    justify-content: space-around;
+    display: flex;
+}

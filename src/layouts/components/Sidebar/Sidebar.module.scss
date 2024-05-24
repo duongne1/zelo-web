@@ -1,0 +1,151 @@
+.container {
+    display: flex;
+    align-items: center;
+    height: 75px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.container:hover {
+    background-color: #e9f2f6;
+}
+
+.title {
+    width: 345px;
+    height: 50px;
+    margin-left: 9px;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    margin-bottom: -2px;
+    justify-content: space-between;
+    width: 280px;
+
+    p {
+        width: 200px;
+        height: 40px;
+        font-size: 17px;
+        font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
+    span {
+        margin-right: 8px;
+        font-size: 12px;
+        margin-top: 2px;
+        color: gray;
+    }
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    color: rgb(110, 109, 109);
+    width: 100%;
+
+    p {
+        width: 160px;
+        font-size: 14px;
+        margin-right: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        width: auto;
+        text-overflow: ellipsis;
+        /* Không thu nhỏ */
+        flex-shrink: 0;
+
+    }
+
+    span {
+        width: 205px;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
+    .under {
+        position: absolute;
+        font-size: 13px;
+        width: 20px;
+        height: 20px;
+        right: -120px;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        background-color: red;
+        margin-right: 100px;
+
+    }
+
+    .your1-message {
+        width: 205px;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .your2-message {
+        width: 240px;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+}
+
+.img-header {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: rgb(213, 211, 211);
+    transition: background-color 0.1s ease;
+}
+
+.new-message-content {
+    p {
+        font-weight: 600;
+        color: black;
+    }
+}
+
+.new-message-content {
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+
+}
+
+.new-message {
+    font-weight: 900;
+    color: rgb(43, 3, 3);
+    text-shadow: 0px 0px 0px black;
+
+}
+
+.footer-chat-input-top-file11 {
+    font-size: 14px;
+}
+
+.footer-chat-file1 {
+    width: auto;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
