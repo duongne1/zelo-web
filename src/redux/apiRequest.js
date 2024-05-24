@@ -34,10 +34,7 @@ export const getSocketConnection = async (dispatch) => {
 export const loginUser = async (user, dispatch, navigate) => {
     dispatch(loginStart());
     try {
-        const res = await axios.post(
-            'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/login/api/v1/auth/login',
-            user,
-        );
+        const res = await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/login', user);
         dispatch(loginSuccess(res.data));
         navigate(config.routes.home);
         return null;
@@ -50,10 +47,7 @@ export const loginUser = async (user, dispatch, navigate) => {
 export const registerUser = async (user, dispatch, navigate) => {
     dispatch(loginStart());
     try {
-        const res = await axios.post(
-            'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/login/api/v1/auth/signup',
-            user,
-        );
+        const res = await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/signup', user);
         dispatch(loginSuccess(res.data));
         navigate(config.routes.home);
         return null;
@@ -66,12 +60,9 @@ export const registerUser = async (user, dispatch, navigate) => {
 export const getUserLogin = async (accessToken, dispatch, id, axiosJWT) => {
     dispatch(getUsersStart());
     try {
-        const res = await axiosJWT.get(
-            'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/login/api/v1/auth/' + id,
-            {
-                headers: { token: `Bearer ${accessToken}` },
-            },
-        );
+        const res = await axiosJWT.get('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/' + id, {
+            headers: { token: `Bearer ${accessToken}` },
+        });
         dispatch(getUsersSuccess(res.data));
     } catch (err) {
         dispatch(getUsersFailed());
@@ -82,8 +73,7 @@ export const getConversationsByUserId = async (accessToken, dispatch, id, axiosJ
     dispatch(getConversationsStart());
     try {
         const res = await axiosJWT.get(
-            'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/login/api/v1/conversation/getConversationByUserId/' +
-                id,
+            'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getConversationByUserId/' + id,
             {
                 headers: { token: `Bearer ${accessToken}` },
             },
@@ -96,9 +86,12 @@ export const getConversationsByUserId = async (accessToken, dispatch, id, axiosJ
 export const getConversationsById = async (accessToken, dispatch, id, axiosJWT) => {
     dispatch(getConversationsByIdStart());
     try {
-        const res = await axiosJWT.get('api/v1/conversation/getConversationById/' + id, {
-            headers: { token: `Bearer ${accessToken}` },
-        });
+        const res = await axiosJWT.get(
+            'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getConversationById/' + id,
+            {
+                headers: { token: `Bearer ${accessToken}` },
+            },
+        );
         dispatch(getConversationsByIdSuccess(res.data));
     } catch (err) {
         dispatch(getConversationsByIdFailed());
@@ -119,7 +112,7 @@ export const deleteUser = async (accessToken, dispatch, id, axiosJWT) => {
 export const logOut = async (dispatch, id, navigate, accessToken, axiosJWT) => {
     dispatch(logOutStart());
     try {
-        await axiosJWT.post('api/v1/auth/logout', id, {
+        await axiosJWT.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/logout', id, {
             headers: { token: `Bearer ${accessToken}` },
         });
         dispatch(logOutSuccess());
