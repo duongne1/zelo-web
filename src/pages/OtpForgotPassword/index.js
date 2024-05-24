@@ -125,10 +125,13 @@ function OtpForgotPassword() {
             }
             if (otpVerified === true) {
                 // Gửi dữ liệu đăng ký lên API
-                const response = await axios.post('api/v1/users/forgot-password', {
-                    username: ph,
-                    passwordNew: password,
-                });
+                const response = await axios.post(
+                    'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/forgot-password',
+                    {
+                        username: ph,
+                        passwordNew: password,
+                    },
+                );
                 if (response) {
                     toast.success('Đổi mật khẩu thành công!');
                     navigate(config.routes.login);

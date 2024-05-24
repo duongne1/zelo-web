@@ -1205,7 +1205,7 @@ function Home({ selectedChatItem }) {
             );
             const responseUser = await axios.get('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/' + userID);
 
-            await axios.post('api/v1/messages/addMessageWeb', {
+            await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                 conversationId: conversationID,
                 content: `${getUserName} đã đuổi ${responseUser.data.name} rời khỏi nhóm`,
                 memberId: memberId, // Biến memberId của bạn ở đây
@@ -1244,7 +1244,7 @@ function Home({ selectedChatItem }) {
 
             const responseUser = await axios.get('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/' + userID);
 
-            await axios.post('api/v1/messages/addMessageWeb', {
+            await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                 conversationId: conversationID,
                 content: `${responseUser.data.name} đã rời nhóm `,
                 memberId: memberId, // Biến memberId của bạn ở đây
@@ -1701,7 +1701,7 @@ function Home({ selectedChatItem }) {
                     type: 'notify',
                 });
             } else {
-                await axios.post('api/v1/messages/addMessageWeb', {
+                await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                     conversationId: chatItem?._id,
                     content: `${getUserName} đã bỏ ghim tin nhắn file`,
                     memberId: memberId, // Biến memberId của bạn ở đây

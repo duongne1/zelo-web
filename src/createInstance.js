@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode';
 
 const refreshToken = async () => {
     try {
-        const res = await axios.post('api/v1/auth/refresh', {
+        const res = await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/auth/refresh', {
             withCredentials: true,
         });
         return res.data;

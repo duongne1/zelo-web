@@ -26,11 +26,14 @@ function SidebarGroup() {
 
     const fetchGroups = async () => {
         try {
-            const response1 = await axios.get(`api/v1/conversation/getConversationByUserId/${getUser?._id}`, {
-                headers: {
-                    token: `Bearer ${getUser?.token}`,
+            const response1 = await axios.get(
+                `https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getConversationByUserId/${getUser?._id}`,
+                {
+                    headers: {
+                        token: `Bearer ${getUser?.token}`,
+                    },
                 },
-            });
+            );
             const conversations = response1.data;
 
             let groupConversations = conversations.filter((conversation) => conversation.type === 'Group');

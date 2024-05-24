@@ -385,7 +385,7 @@ function Search() {
                 const conversation = createConversationResponse.data;
                 const memberId1 = conversation?.members.find((member) => member.userId?._id === getUser?._id)?._id;
                 const myName = getUser?.name;
-                await axios.post('api/v1/messages/addMessageWeb', {
+                await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/messages/addMessageWeb', {
                     conversationId: conversation._id,
                     content: `${myName.slice(myName.lastIndexOf(' ') + 1)} đã tạo nhóm`,
                     memberId: memberId1, // Biến memberId của bạn ở đây

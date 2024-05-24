@@ -33,7 +33,10 @@ function SidebarFriend() {
 
     const fetchDataConversationByUserID = async () => {
         try {
-            const response = await axios.get('api/v1/conversation/getConversationByUserId/' + getUser?._id);
+            const response = await axios.get(
+                'https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/conversation/getConversationByUserId/' +
+                    getUser?._id,
+            );
             if (response.data) {
                 const fetchedData = response.data;
                 setData(fetchedData);
@@ -73,7 +76,9 @@ function SidebarFriend() {
 
     const fetchFriends = async () => {
         try {
-            const response = await axios.get(`api/v1/users/getFriendWithDetails/${getUser?._id}`);
+            const response = await axios.get(
+                `https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/getFriendWithDetails/${getUser?._id}`,
+            );
             const friendIds = response.data;
 
             // Lấy thông tin chi tiết của từng bạn bè
@@ -115,7 +120,7 @@ function SidebarFriend() {
     const handleDeleteFriend = async (friendId) => {
         try {
             // Gửi yêu cầu xóa bạn bè lên máy chủ
-            await axios.post('api/v1/users/deleteFriends', {
+            await axios.post('https://backend-zalo-pfceb66tqq-as.a.run.app/api/v1/users/deleteFriends', {
                 id_sender: friendId,
                 id_receiver: getUser?._id,
             });
