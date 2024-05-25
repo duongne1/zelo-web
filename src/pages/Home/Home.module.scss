@@ -2422,12 +2422,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid #D6DBE1;
+    border-bottom: 1px solid white;
 
     h1 {
         font-size: 17px;
         font-weight: bold;
         margin-left: 15px;
+        margin-top: 17px;
     }
 }
 
